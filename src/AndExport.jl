@@ -37,14 +37,21 @@ macro AndExport(expr::Expr)
                                    (const name_ = val__) |
                                    (name_ = val__) )
             if @capture (name) ( (name2_{T__} <: Z_ where T2_) |
-                                  (name2_ <: Z_ where T2_) |
-                                  (name2_{T__} where T2_) |
-                                  (name2_ where T2_) |
-                                  (name2_{T__} <: Z_) |
-                                  (name2_ <: Z_) |
-                                  (name2_{T__}) |
-                                  name2_ )
-                push!(exports, :(export $(esc(name2))))
+                                 (name2_ <: Z_ where T2_) |
+                                 (name2_{T__} where T2_) |
+                                 (name2_ where T2_) |
+                                 (name2_{T__} <: Z_) |
+                                 (name2_ <: Z_) |
+                                 (name2_{T__}) |
+                                 name2_ )
+                # Ignore (::Type{T}) functions for exports
+                # if @capture (name2) (::Type{T__})
+                #     @info "Ignoring" name
+                if name2 isa Expr# && name2.head == Symbol("::")
+                    # @info "Ignoring" name
+                else
+                    push!(exports, :(export $(esc(name2))))
+                end
             end
         elseif @capture (item) (macro name_(args__) content__ end)
             name = Symbol("@" * string(name))
