@@ -4,7 +4,7 @@ module AndExport
 # * Exporting
 #----------------------------
 
-export @export
+export @xport
 
 using MacroTools
 
@@ -21,7 +21,7 @@ function my_flatten1(ex)
 end
 iterflatten(ex) = MacroTools.postwalk(my_flatten1, block(ex)).args
 
-macro export(expr::Expr)
+macro xport(expr::Expr)
     expr = macroexpand(__module__, expr)
 
     exports = Expr[]
