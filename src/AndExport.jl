@@ -67,7 +67,8 @@ macro xport(expr::Expr)
         error("Unknown object to export: $repr.")
     end
 
-    fullcode = Expr(:block, exports..., esc(expr))
+    expr = :(Base.@__doc__ $(esc(expr)))
+    fullcode = Expr(:block, exports..., expr)
 end
 
 end # module
