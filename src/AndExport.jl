@@ -29,6 +29,7 @@ macro xport(expr::Expr)
     for item in iterflatten(expr)
         if @capture (item) ( (function name_(args__) where {T__} content__ end) |
                                    (function name_(args__) content__ end) |
+                                   (function name_ end) |
                                    (name_(args__) where {T__} = content__) |
                                    (name_(args__) = content__) |
                                    (mutable struct name_ content__ end) |
