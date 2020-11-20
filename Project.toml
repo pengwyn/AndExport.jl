@@ -1,7 +1,7 @@
 name = "AndExport"
 uuid = "4484d908-372d-4f90-b90b-0ec97f005b8c"
 authors = ["Daniel Cocks <daniel.cocks@gmail.com>"]
-version = "1.0"
+version = "1.0.1"
 
 [deps]
 MacroTools = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
